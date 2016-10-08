@@ -101,6 +101,7 @@ int  main( int argc, char*argv[] )
 		else
 		{
 			
+
 		}
 		cin >> key;
 		pCommand = aa->handle( key );
