@@ -2,6 +2,7 @@
 //kelei
 
 #include <iostream>
+#include "Actor.h"
 using namespace  std;
 
 class command
@@ -9,7 +10,8 @@ class command
 public:
 	command(){}
 	~command(){}
-	virtual void excute() = 0;
+	virtual void excute( Actor &actor ) = 0;
+
 };
 class fire :public command
 {
@@ -22,9 +24,9 @@ public:
 	{
 		cout << "Fire Destruction" << endl;
 	}
-	virtual void excute()
+	virtual void excute( Actor &actor )
 	{
-		cout << "..........Fire" << endl;
+		actor.fire();
 	}
 
 };
@@ -33,14 +35,14 @@ class jump :public command
 public:
 	jump(){ cout << "jump construction" << endl; }
 	~jump(){ cout << "jump destruction" << endl; }
-	virtual void excute(){ cout << "..............jump" << endl; }
+	virtual void excute( Actor &actor ){ actor.jump(); }
 };
 class run :public command
 {
 public:
 	run(){ cout << "run consturction" << endl; }
 	~run(){ cout << "destruction" << endl; }
-	virtual void excute(){ cout << "............run" << endl; }
+	virtual void excute( Actor &actor ){ actor.run(); }
 };
 class inputHandle
 {
@@ -50,22 +52,23 @@ public:
 		m_Cjump = new jump();
 		m_Crun = new run();
 	}
-	void handle( char key )
+	command* handle( char key )
 	{
 		switch (key)
 		{
 		case '1':
-			m_Cfrie->excute();
+			return m_Cfrie;
 			break;
 		case '2':
-			m_Cjump->excute();
+			return m_Cjump;
 			break;
 		case '3':
-			m_Crun->excute();
+			return m_Crun;
 			break;
 		default:
 			break;
 		}
+		return NULL;
 	}
 	~inputHandle(){};
 private:
@@ -77,12 +80,40 @@ int  main( int argc, char*argv[] )
 {
 	char key;
 	inputHandle *aa = new inputHandle;
+#include "Actor.h"
+	Actor *pActor= new human;
+	command *pCommand = NULL;
 	do 
 	{
 		cin >> key;
-		aa->handle( key );
-		
+		if (key =='9')
+		{
+			pActor = new human;
+		}
+		else if (key == '8')
+		{
+			pActor = new sprite;
+		}
+		else if (key == '7')
+		{
+			pActor = new beast;
+		}
+		else
+		{
+			
+		}
+		cin >> key;
+		pCommand = aa->handle( key );
+		if (pCommand!=NULL)
+		{
+			pCommand->excute(*pActor);
+		}
+	
 	} while (key != '0');
+
+	delete pActor;
+	delete pCommand;
+	delete aa;
 	delete aa;
 	return 0;
 }
