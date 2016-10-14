@@ -1,0 +1,46 @@
+newmtl Head_MeshSG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl JawOpen2:lambert8SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl Jaw_MeshSG1
+illum 4
+Kd 0.87 0.87 0.87
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Jaw_MeshSG3
+illum 4
+Kd 0.76 0.46 0.42
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Jaw_MeshSG5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl eyes_test:Eyes2:EyesSG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.33 0.33 0.33
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.77 0.77 0.77
+Ns 0.06
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

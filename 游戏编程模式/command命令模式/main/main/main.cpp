@@ -4,7 +4,6 @@
 #include <iostream>
 #include "Actor.h"
 using namespace  std;
-
 class command
 {
 public:
@@ -40,7 +39,7 @@ public:
 class run :public command
 {
 public:
-	run(){ cout << "run consturction" << endl; }
+	run(){ cout << "run construction" << endl; }
 	~run(){ cout << "destruction" << endl; }
 	virtual void excute( Actor &actor ){ actor.run(); }
 };
@@ -114,7 +113,6 @@ int  main( int argc, char*argv[] )
 
 	delete pActor;
 	delete pCommand;
-	delete aa;
 	delete aa;
 	return 0;
 }
