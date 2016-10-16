@@ -3,7 +3,7 @@
 
 
 
-GLshader::GLshader() :m_program(0), m_totalShaders(0)
+GLshader::GLshader() : m_totalShaders(0)
 					  
 {
 	m_attributeList.clear();
@@ -19,13 +19,14 @@ GLshader::~GLshader()
 	m_uniformList.clear();
 }
 
-bool GLshader::LoadFormFile( string _fileName, GLenum whichShader )
+bool GLshader::LoadFormFile( const string& _fileName, GLenum whichShader )
 {
-	ifstream file( _fileName.data() );
-	 if (file)
+	ifstream fp;
+	fp.open(_fileName.c_str(), ios_base::in);
+	if (fp)
 	 {	
 		 string line, buffer;
-		 while (getline( file, line ))
+		 while (getline(fp, line))
 		 {
 			 buffer.append( line );
 			 buffer.append( "\r\n" );
@@ -39,9 +40,10 @@ bool GLshader::LoadFormFile( string _fileName, GLenum whichShader )
 	 {
 		 return false;
 	 }
+	 return true;
 }
 
-bool GLshader::LoadFromString( string _stringstream, GLenum whichShader )
+bool GLshader::LoadFromString( const string& _stringstream, GLenum whichShader )
 {
 	//¥¥Ω®shader
 	GLuint shader = glCreateShader( whichShader );
@@ -51,7 +53,7 @@ bool GLshader::LoadFromString( string _stringstream, GLenum whichShader )
 	//±‡“Îshader
 	glCompileShader( shader );
 	GLint status;
-	glGetShaderiv( shader, GL_SHADER_COMPILER, &status );
+ 	glGetShaderiv( shader, GL_COMPILE_STATUS, &status );
 	if (status ==GL_FALSE)
 	{
 		GLint 	 infoLogLength;
@@ -120,7 +122,7 @@ void GLshader::addAttribute( const string & _attribute )
 
 void GLshader::addUniform( const string& _uniform )
 {
-	m_uniformList[_uniform] = glGetAttribLocation( m_program, _uniform.c_str() );
+	m_uniformList[_uniform] = glGetUniformLocation( m_program, _uniform.c_str() );
 }
 
 GLuint GLshader::operator()( const string &uniform )
@@ -131,4 +133,9 @@ GLuint GLshader::operator()( const string &uniform )
 GLuint GLshader::operator[]( const string & attribute )
 {
 	return m_attributeList[attribute];
+}
+
+void GLshader::DeleteShaderProgram()
+{
+	glDeleteProgram(m_program);
 }

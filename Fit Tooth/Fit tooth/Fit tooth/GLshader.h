@@ -9,8 +9,8 @@ class GLshader
 public:
 	GLshader();
 	~GLshader();
-	bool LoadFormFile( string _fileName, GLenum whichShader );
-	bool LoadFromString( string _stringstream, GLenum whichShader );
+	bool LoadFormFile( const string& _fileName, GLenum whichShader );
+	bool LoadFromString( const string& _stringstream, GLenum whichShader );
 	void CreateAndLinkProgram();
 	void Use();
 	void Unuse();
@@ -18,6 +18,7 @@ public:
 	void addUniform( const string& _uniform );
 	GLuint operator()( const string &uniform );
 	GLuint operator[]( const string & attribute );
+	void DeleteShaderProgram();
 private:
 	enum ShaderType{VERTEX_SHADER,FRAGMENT_SHADER,GEOMETRY_SHADER};	  
 	GLuint				m_program;
